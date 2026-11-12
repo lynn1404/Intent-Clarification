@@ -28,7 +28,6 @@ class ConfirmGateChoiceRequest(BaseModel):
     """Sent when the user picks a route at the gate."""
     user_prompt: str = Field(..., min_length=1, max_length=20000)
     selected_mode: Mode
-    history: list[MessageItem] = Field(default_factory=list, max_length=50)
     # Context from the gate, so the execution agent knows what is at stake.
     detected_task: str | None = None
     extracted_skill: str | None = None

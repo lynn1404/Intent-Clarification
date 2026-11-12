@@ -25,7 +25,6 @@ export interface ProcessPromptRequest {
 export interface ConfirmGateChoiceRequest {
   user_prompt: string;
   selected_mode: Mode;
-  history: MessageItem[];
   detected_task: string | null;
   extracted_skill: string | null;
 }

@@ -162,8 +162,6 @@ export default function App() {
       const response = await confirmGateChoice({
         user_prompt: gate.userPrompt,
         selected_mode: selectedMode,
-        // A gate opens a new cycle, so the first answer starts from a clean history.
-        history: [],
         detected_task: gate.detectedTask,
         extracted_skill: gate.extractedSkill,
       });
