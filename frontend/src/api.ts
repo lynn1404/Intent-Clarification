@@ -62,5 +62,5 @@ export function processPrompt(
 export function confirmGateChoice(
   payload: ConfirmGateChoiceRequest
 ): Promise<ProcessPromptResponse> {
-  return post('/confirm-gate', payload);
+  return post('/execute', payload);
 }

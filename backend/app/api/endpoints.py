@@ -33,14 +33,14 @@ async def process_prompt(request: ProcessPromptRequest):
     return response
 
 
-@router.post("/confirm-gate", response_model=ProcessPromptResponse)
-async def confirm_gate(request: ConfirmGateChoiceRequest):
+@router.post("/execute", response_model=ProcessPromptResponse)
+async def execute(request: ConfirmGateChoiceRequest):
     """
     Called when the user picks a route at the gate. Locks the route and
     generates the first answer of the cycle.
     """
     logger.info(
-        "[confirm-gate] route=%s skill=%r",
+        "[execute] route=%s skill=%r",
         request.selected_mode, request.extracted_skill,
     )
     execution_output = await execute_chat_response(
