@@ -40,20 +40,43 @@ The choice holds for the whole task. Follow-ups and answers to a step continue o
 
 ```mermaid
 flowchart LR
-    U[User message] --> P[POST /api/process-prompt]
-    P --> C{"Intent gate agent<br/>(gpt-4o-mini)<br/>new task?"}
-    C -- yes --> G[Gate:<br/>task, skill, two routes]
-    G -- user picks a route --> CG[POST /api/confirm-gate]
-    CG --> E["Execution agent (gpt-4o)<br/>answers under the chosen route"]
-    C -- no --> E
-    E -. next message .-> U
+    subgraph UI [Frontend]
+        M([User sends a message])
+        G([Gate shown:<br/>task, skill, two routes])
+        A([Answer shown])
+    end
+
+    subgraph API [Backend endpoints]
+        PP[POST /api/process-prompt]
+        EP[POST /api/execute]
+    end
+
+    subgraph AG [Agents]
+        IG{{Intent gate agent:<br/>new task or continuation?}}
+        EX{{Execution agent:<br/>answers under the chosen route}}
+    end
+
+    M --> PP --> IG
+    IG -- new task --> G
+    G -- user picks a route --> EP --> EX
+    IG -- continuation --> EX
+    EX --> A
+    A -. next message .-> M
+
+    classDef ui fill:#eef2ff,stroke:#6366f1,color:#1e1b4b
+    classDef api fill:#ecfdf5,stroke:#10b981,color:#064e3b
+    classDef agent fill:#fff7ed,stroke:#f97316,color:#7c2d12
+    class M,G,A ui
+    class PP,EP api
+    class IG,EX agent
 ```
+
 
 
 | Endpoint | Purpose |
 |---|---|
 | `POST /api/process-prompt` | Every user message. Returns either a gate (`needs_gate: true`, the task, the skill and both routes) or an answer under the active mode. |
-| `POST /api/confirm-gate` | The user's route choice. Locks the mode and returns the first answer of the task. |
+| `POST /api/execute` | The user's route choice. Locks the mode and returns the first answer of the task. |
 | `GET /health` | Liveness check. |
 
 
