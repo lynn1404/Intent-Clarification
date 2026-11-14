@@ -22,7 +22,7 @@ export interface ProcessPromptRequest {
   extracted_skill: string | null;
 }
 
-export interface ConfirmGateChoiceRequest {
+export interface ExecuteRequest {
   user_prompt: string;
   selected_mode: Mode;
   detected_task: string | null;

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { FormEvent, KeyboardEvent } from 'react';
 import type { GateData, MessageItem, Mode } from './types';
-import { processPrompt, confirmGateChoice } from './api';
+import { processPrompt, executePrompt } from './api';
 import { IntentGate } from './components/IntentGate';
 import { SendIcon } from './components/Icons';
 import { Markdown } from './components/Markdown';
@@ -159,7 +159,7 @@ export default function App() {
     setItems(withChoice(items, gateIndex, selectedMode));
 
     try {
-      const response = await confirmGateChoice({
+      const response = await executePrompt({
         user_prompt: gate.userPrompt,
         selected_mode: selectedMode,
         detected_task: gate.detectedTask,

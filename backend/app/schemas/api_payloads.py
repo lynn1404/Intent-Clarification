@@ -24,7 +24,7 @@ class ProcessPromptRequest(BaseModel):
     extracted_skill: str | None = None
 
 
-class ConfirmGateChoiceRequest(BaseModel):
+class ExecuteRequest(BaseModel):
     """Sent when the user picks a route at the gate."""
     user_prompt: str = Field(..., min_length=1, max_length=20000)
     selected_mode: Mode

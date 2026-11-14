@@ -1,5 +1,5 @@
 from app.schemas.api_payloads import (
-    ConfirmGateChoiceRequest,
+    ExecuteRequest,
     MessageItem,
     Mode,
     ProcessPromptRequest,

@@ -5,7 +5,7 @@ from fastapi import APIRouter
 from app.agents import execute_chat_response
 from app.agents import evaluate_and_route
 from app.schemas import (
-    ConfirmGateChoiceRequest,
+    ExecuteRequest,
     ProcessPromptRequest,
     ProcessPromptResponse,
 )
@@ -34,7 +34,7 @@ async def process_prompt(request: ProcessPromptRequest):
 
 
 @router.post("/execute", response_model=ProcessPromptResponse)
-async def execute(request: ConfirmGateChoiceRequest):
+async def execute(request: ExecuteRequest):
     """
     Called when the user picks a route at the gate. Locks the route and
     generates the first answer of the cycle.

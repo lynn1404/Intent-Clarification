@@ -1,7 +1,7 @@
 import type {
   ProcessPromptRequest,
   ProcessPromptResponse,
-  ConfirmGateChoiceRequest,
+  ExecuteRequest,
 } from './types';
 
 // Relative: the Vite dev server proxies /api to the backend (see vite.config.ts).
@@ -59,8 +59,8 @@ export function processPrompt(
   return post('/process-prompt', payload);
 }
 
-export function confirmGateChoice(
-  payload: ConfirmGateChoiceRequest
+export function executePrompt(
+  payload: ExecuteRequest
 ): Promise<ProcessPromptResponse> {
   return post('/execute', payload);
 }
